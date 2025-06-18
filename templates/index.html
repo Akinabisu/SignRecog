@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Розпізнавання дорожніх знаків</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Розпізнавання дорожніх знаків</h1>
+    <form method="post" enctype="multipart/form-data" class="upload-form" id="uploadForm">
+        <label for="imageInput">Оберіть зображення</label>
+        <input type="file" name="image" required id="imageInput">
+    </form>
+
+    {% if filename %}
+    <div class="container">
+        <div class="left">
+            <h2>Завантажене зображення:</h2>
+            <div class="image-box">
+                <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Image">
+            </div>
+        </div>
+        <div class="right">
+            <h2>Розпізнаний знак:</h2>
+            <h2>{{ label }}</h2>
+        </div>
+    </div>
+    {% endif %}
+    <script>
+        document.getElementById('imageInput').addEventListener('change', function () {
+            document.getElementById('uploadForm').submit();
+        });</script>
+</body>
+</html>
